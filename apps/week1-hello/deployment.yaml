@@ -1,0 +1,33 @@
+# Week 1 toy app. Deliberately trivial — the point isn't nginx,
+# it's watching ArgoCD notice this file, diff it against cluster state,
+# and reconcile. Once you've seen that loop once, GitOps stops being
+# an abstract word.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-gitops
+  namespace: week1-hello
+  labels:
+    app: hello-gitops
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: hello-gitops
+  template:
+    metadata:
+      labels:
+        app: hello-gitops
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "64Mi"

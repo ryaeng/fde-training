@@ -1,0 +1,30 @@
+# Apply this AFTER argocd is installed and AFTER you've pushed
+# gitops-repo/ to your own git remote (github/gitlab, private is fine).
+#
+# Replace REPO_URL below with your actual remote, e.g.:
+#   https://github.com/yourname/cluster-mental-model.git
+#
+# This is the object that turns "a yaml file sitting in a repo" into
+# "a thing ArgoCD actively reconciles." Applying this CR is the moment
+# GitOps becomes real instead of conceptual.
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: week1-hello
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: REPO_URL
+    targetRevision: main
+    path: apps/week1-hello
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: week1-hello
+  syncPolicy:
+    automated:
+      prune: true       # deleting a file in git deletes the resource in-cluster
+      selfHeal: true     # manual kubectl edits get reverted back to match git
+    syncOptions:
+      - CreateNamespace=false   # namespace.yaml handles this explicitly
