@@ -19,6 +19,12 @@ spec:
     repoURL: https://github.com/ryaeng/fde-training.git
     targetRevision: main
     path: apps/week1-hello
+    directory:
+      # kind-config.yaml is a `kind` CLI bootstrap file (kind: Cluster,
+      # kind.x-k8s.io/v1alpha4), NOT a manifest to apply to the cluster.
+      # Without this exclude, ArgoCD tries to `kubectl apply` it and fails
+      # with "could not find kind.x-k8s.io/Cluster".
+      exclude: 'kind-config.yaml'
   destination:
     server: https://kubernetes.default.svc
     namespace: week1-hello
