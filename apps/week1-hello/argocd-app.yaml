@@ -16,7 +16,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: REPO_URL
+    repoURL: https://github.com/ryaeng/fde-training.git
     targetRevision: main
     path: apps/week1-hello
   destination:
