@@ -15,7 +15,8 @@ Prerequisite: Docker Desktop (or another local Docker runtime) running.
 # install kind + kubectl if you don't have them (macOS example)
 brew install kind kubectl
 
-# create the cluster from the config in this repo
+# create the cluster from the config at the repo root
+# (run from the repo root, where kind-config.yaml lives)
 kind create cluster --config kind-config.yaml
 
 # confirm you have 3 nodes and can talk to the cluster
