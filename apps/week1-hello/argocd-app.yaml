@@ -1,8 +1,9 @@
-# Apply this AFTER argocd is installed and AFTER you've pushed
-# gitops-repo/ to your own git remote (github/gitlab, private is fine).
+# Apply this AFTER argocd is installed and AFTER you've pushed this repo
+# to your own git remote (github/gitlab, private is fine).
 #
-# Replace REPO_URL below with your actual remote, e.g.:
-#   https://github.com/yourname/cluster-mental-model.git
+# Make sure spec.source.repoURL below points at your actual remote
+# (it defaults to https://github.com/ryaeng/fde-training.git — change it
+# if you forked).
 #
 # This is the object that turns "a yaml file sitting in a repo" into
 # "a thing ArgoCD actively reconciles." Applying this CR is the moment

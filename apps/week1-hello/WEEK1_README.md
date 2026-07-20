@@ -57,17 +57,17 @@ Log in at https://localhost:8080 as `admin` with that password.
 
 ## Session 3 — push this repo and wire up the Application
 
-1. Push the `gitops-repo/` folder (already in this project) to your own
-   git remote — a private GitHub repo is fine, ArgoCD just needs a URL
-   it can reach.
+1. Push this repo to your own git remote — a private GitHub repo is fine,
+   ArgoCD just needs a URL it can reach.
 
-2. Edit `gitops-repo/argocd-app.yaml` and replace `REPO_URL` with your
-   actual remote URL.
+2. Check `apps/week1-hello/argocd-app.yaml` and make sure `spec.source.repoURL`
+   points at your actual remote (it currently points at
+   `https://github.com/ryaeng/fde-training.git` — change it if you forked).
 
 3. Apply it:
 
 ```bash
-kubectl apply -f gitops-repo/argocd-app.yaml
+kubectl apply -f apps/week1-hello/argocd-app.yaml
 ```
 
 4. Watch it sync:
